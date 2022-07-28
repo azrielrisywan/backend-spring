@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProdusenService {
@@ -17,6 +18,10 @@ public class ProdusenService {
 
     public List<Produsen> findAll(){
         return dao.findAll();
+    }
+
+    public Optional<Produsen> findById(Integer id){
+        return dao.findById(id);
     }
 
     public ProdusenDTO.New save(ProdusenDTO.New produsen) {

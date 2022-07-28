@@ -1,8 +1,8 @@
 package com.examplebootcamp.backend.controller;
 
-import com.examplebootcamp.backend.dto.ProdusenDTO;
-import com.examplebootcamp.backend.entity.Produsen;
-import com.examplebootcamp.backend.service.ProdusenService;
+import com.examplebootcamp.backend.dto.ProdukDTO;
+import com.examplebootcamp.backend.entity.Produk;
+import com.examplebootcamp.backend.service.ProdukService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
@@ -14,27 +14,27 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/produsen")
-public class ProdusenController {
+@RequestMapping("/produk")
+public class ProdukController {
 
     @Autowired
-    private ProdusenService service;
+    private ProdukService service;
 
     @GetMapping("/list")
-    public List<Produsen> findAll(){
+    public List<Produk> findAll(){
         return service.findAll();
     }
 
     @GetMapping("/findById/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") Integer id){
-        Optional<Produsen> response = service.findById(id);
+        Optional<Produk> response = service.findById(id);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping("/save")
-    public ResponseEntity<?> save(@RequestBody @Valid ProdusenDTO.New produsen) {
+    public ResponseEntity<?> save(@RequestBody @Valid ProdukDTO.New produk) {
         try {
-            ProdusenDTO.New response = service.save(produsen);
+            ProdukDTO.New response = service.save(produk);
             return ResponseEntity.ok(response);
         } catch (DataAccessException dae) {
             return new ResponseEntity<>(dae.getLocalizedMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -42,9 +42,9 @@ public class ProdusenController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<?> update(@RequestBody @Valid ProdusenDTO.Update produsen) {
+    public ResponseEntity<?> update(@RequestBody @Valid ProdukDTO.Update produk) {
         try {
-            ProdusenDTO.Update response = service.update(produsen);
+            ProdukDTO.Update response = service.update(produk);
             return ResponseEntity.ok(response);
         } catch (DataAccessException dae) {
             return new ResponseEntity<>(dae.getLocalizedMessage(), HttpStatus.INTERNAL_SERVER_ERROR);

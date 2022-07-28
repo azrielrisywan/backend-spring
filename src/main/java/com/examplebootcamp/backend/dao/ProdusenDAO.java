@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ProdusenDAO {
@@ -55,19 +56,34 @@ public class ProdusenDAO {
         return produsen;
     }
 
-//    public ProdusenDTO.Delete delete(ProdusenDTO.Delete produsen) {
-//        String query = "delete from produsen where id = :id";
-//        MapSqlParameterSource map = new MapSqlParameterSource();
-//        map.addValue("id", produsen.getId());
-//        jdbcTemplate.update(query, map);
-//        return produsen;
-//    }
-
     public void delete(Integer id) {
         String query = "delete from produsen where id = :id";
         MapSqlParameterSource map = new MapSqlParameterSource();
         map.addValue("id", id);
         jdbcTemplate.update(query, map);
+    }
+
+    public Optional<Produsen> findById(Integer id){
+        String query = "select\n" +
+                "\tid ,\n" +
+                "\tnama ,\n" +
+                "\tkode ,\n" +
+                "\talamat\n" +
+                "from\n" +
+                "\tprodusen where id = :id";
+        MapSqlParameterSource map = new MapSqlParameterSource();
+        map.addValue("id", id);
+        return jdbcTemplate.queryForObject(query, map, new RowMapper<Optional<Produsen>>() {
+            @Override
+            public Optional<Produsen> mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Produsen produsen = new Produsen();
+                produsen.setId(rs.getInt("id"));
+                produsen.setNama(rs.getString("nama"));
+                produsen.setKode(rs.getString("kode"));
+                produsen.setAlamat(rs.getString("alamat"));
+                return Optional.of(produsen);
+            }
+        });
     }
 
 }
