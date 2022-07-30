@@ -7,11 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Produk {
+public class Transaksi {
     private Integer id;
-    private String nama;
-    private String jenis;
-    private Integer berat;
-    private Produsen produsen;
-    private Double harga;
+    private Double kuantitas;
+    private Produk produk;
 }

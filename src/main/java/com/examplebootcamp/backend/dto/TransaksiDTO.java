@@ -1,31 +1,21 @@
 package com.examplebootcamp.backend.dto;
 
-import com.examplebootcamp.backend.entity.Produsen;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-public class ProdukDTO {
+public class TransaksiDTO {
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     public static class New {
         @NotNull
-        @NotEmpty
-        private String nama;
+        private Double kuantitas;
         @NotNull
-        @NotEmpty
-        private String jenis;
-        @NotNull
-        private Integer berat;
-        @NotNull
-        private Produsen produsen;
-        @NotNull
-        private Double harga;
+        private Integer produk_id;
     }
 
     @Data
@@ -35,16 +25,26 @@ public class ProdukDTO {
         @NotNull
         private Integer id;
         @NotNull
-        @NotEmpty
-        private String nama;
+        private Integer kuantitas;
         @NotNull
-        @NotEmpty
-        private String jenis;
+        private Integer produk_id;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Detail {
         @NotNull
-        private Integer berat;
+        private Integer id;
         @NotNull
-        private Produsen produsen;
+        private String produk;
+        @NotNull
+        private String produsen;
         @NotNull
         private Double harga;
+        @NotNull
+        private Integer kuantitas;
+        @NotNull
+        private Double totalHarga;
     }
 }
